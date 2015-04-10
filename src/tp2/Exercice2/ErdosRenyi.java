@@ -1,10 +1,9 @@
 package tp2.Exercice2;
 
-import java.util.Random;
-
 import tp2.Exercice1.Graph;
 import tp2.Exercice1.ValuedGraph;
 import tp2.Exercice1.exception.VertexNotFoundException;
+import tp2.utils.Tools;
 
 public class ErdosRenyi implements RandomGraphGenerator {
 
@@ -20,16 +19,14 @@ public class ErdosRenyi implements RandomGraphGenerator {
 			catch(Exception e){}
 		}
 		
-		Random rd = new Random();
-		
 		int max = (int)Math.pow(new Double(""+n), 4.0);
 		
 		for(int i=1;i<n; i++){
 			for(int j=i+1; j<=n;j++){
-				Float aux = rd.nextFloat();
+				Float aux = Tools.RD.nextFloat();
 				if(aux < p){
 					try {
-						g.addEdge(i, j, (float)rd.nextInt(max));
+						g.addEdge(i, j, (float)Tools.RD.nextInt(max));
 					} catch (VertexNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

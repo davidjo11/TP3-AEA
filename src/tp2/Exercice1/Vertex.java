@@ -6,6 +6,8 @@ public class Vertex {
 
 	private boolean marqued;
 	
+	private int tag = 0;
+	
 	public Vertex(int i){
 		this.summit = i;
 		this.marqued = false;
@@ -21,5 +23,13 @@ public class Vertex {
 	
 	public boolean isMarqued(){
 		return this.marqued;
+	}
+	
+	public void setTag(int tag){
+		this.tag = tag;
+	}
+	
+	public int getTag(){
+		return this.tag;
 	}
 }

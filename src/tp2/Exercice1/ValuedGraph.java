@@ -130,9 +130,11 @@ public class ValuedGraph implements Graph {
 		Edge edge;
 		while(it.hasNext()){
 			edge = it.next();
-			if((edge.getVertex()[0].getVertex() == v1 && edge.getVertex()[1].getVertex() == v2) || edge.getVertex()[1].getVertex() == v1 && edge.getVertex()[0].getVertex() == v2){
+			if((edge.getVertex()[0].getVertex() == v1 && edge.getVertex()[1].getVertex() == v2)){
 				return edge;
 			}
+			else if(edge.getVertex()[1].getVertex() == v1 && edge.getVertex()[0].getVertex() == v2)
+				return edge;
 		}
 		return null;
 	}
