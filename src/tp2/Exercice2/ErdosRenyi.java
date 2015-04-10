@@ -4,7 +4,6 @@ import java.util.Random;
 
 import tp2.Exercice1.Graph;
 import tp2.Exercice1.ValuedGraph;
-import tp2.Exercice1.Vertex;
 import tp2.Exercice1.exception.VertexNotFoundException;
 
 public class ErdosRenyi implements RandomGraphGenerator {
@@ -33,7 +32,7 @@ public class ErdosRenyi implements RandomGraphGenerator {
 						g.addEdge(i, j, (float)rd.nextInt(max));
 					} catch (VertexNotFoundException e) {
 						// TODO Auto-generated catch block
-						
+						e.printStackTrace();
 					}
 				}
 			}

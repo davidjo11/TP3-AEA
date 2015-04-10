@@ -10,9 +10,8 @@ import java.util.Random;
 
 import tp2.Exercice1.Edge;
 import tp2.Exercice1.Graph;
-import tp2.Exercice1.ValuedGraph;
 import tp2.Exercice1.Vertex;
-import tp2.Exercice1.exception.VertexNotFoundException;
+import tp2.utils.Tools;
 
 public class MST implements MSTTools {
 
@@ -109,7 +108,7 @@ Output: Vnew and Enew describe a minimal spanning tree
 		
 		Edge min = le[le.length], aux = null;
 		
-		Collections.sort(g.listEdges(), c);
+		Collections.sort(g.listEdges(), Tools.SINGLETON);
 		
 		
 		return null;
