@@ -53,17 +53,17 @@ Output: Vnew and Enew describe a minimal spanning tree
 			while(itlu.hasNext()){
 				u = itlu.next();
 				//Pour chaque arete de issue du sommet u on regarde si le sommet v non présent dans lu est lié au sommet u
-				Iterator<Edge> itlv = g.getEdge(u).iterator();
+				Iterator<Edge> itlv = g.listEdges().iterator();
 				while(itlv.hasNext()){
 					aux = itlv.next();
 					if(aux.getVertex()[0].getVertex() == u)
 						v = aux.getVertex()[1].getVertex();
 					else v = aux.getVertex()[0].getVertex();
-					System.out.println("Pour "+u+" U contient "+v +"? "+lu.contains(v));
+//					System.out.println("Pour "+u+" U contient "+v +"? "+lu.contains(v));
 					if(!lu.contains(v)){
 						aux = g.getEdge(u, v);
 						if(aux != null){
-							System.out.println("Arete "+u+" et "+v+" et val: "+aux.getValue());
+//							System.out.println("Arete "+u+" et "+v+" et val: "+aux.getValue());
 							if(minValuedEdge == null)
 								minValuedEdge = aux;
 							else if(minValuedEdge.getValue() > aux.getValue()){
@@ -80,9 +80,11 @@ Output: Vnew and Enew describe a minimal spanning tree
 			//Si on en a trouvé une alors on retourne ajoute le sommet v dans l'ensemble u.
 			else if(!lu.contains(minValuedEdge.getVertex()[1].getVertex())){
 				lu.add(minValuedEdge.getVertex()[1].getVertex());
+//				System.out.println(minValuedEdge.getVertex()[1].getVertex()+" ajouté! ("+lu.contains(minValuedEdge.getVertex()[1].getVertex())+")");
 			}
 			else {
 				lu.add(minValuedEdge.getVertex()[0].getVertex());
+//				System.out.println(minValuedEdge.getVertex()[0].getVertex()+" ajouté! ("+lu.contains(minValuedEdge.getVertex()[0].getVertex())+")");
 			}
 			lv.add(minValuedEdge);
 			minValuedEdge = null;
@@ -152,13 +154,10 @@ Output: Vnew and Enew describe a minimal spanning tree
 					//On associe le tag de v1 à tout les sommets ayant le même tag que v2.
 					while(itv.hasNext()){
 						aux = itv.next();
-						if(aux.getTag() != v2.getTag())
+						if(aux.getTag() == v2.getTag())
 							aux.setTag(v1.getTag());
 					}
-				}
-				else {//Les tags des deux sommets sont égaux alors on retourne le graphe partiel.
-					return f.iterator();
-				}
+				}//Sinon on ajoute pas l'arête (=> cycle).
 			}//Cas suivants:
 			else if(!vi.contains(s1.getVertex()) && !vi.contains(s2.getVertex())){//- les deux sommets ne sont pas présents dans le graphe partiel;
 				s1.setTag(tag);
@@ -169,6 +168,7 @@ Output: Vnew and Enew describe a minimal spanning tree
 				v.add(s2);
 				vi.add(s2.getVertex());
 				
+				f.add(min);
 				tag++;
 			}
 			else if(!vi.contains(s1.getVertex()) && vi.contains(s2.getVertex())){//- le premier sommet s1 n'est pas présent dans le graphe partiel;
@@ -180,7 +180,10 @@ Output: Vnew and Enew describe a minimal spanning tree
 				}
 				v.add(s1);
 				vi.add(s1.getVertex());
-			}else if(vi.contains(s1.getVertex()) && !vi.contains(s2.getVertex())){//- le deuxième sommet s2 n'est pas présent dans le graphe partiel;
+				
+				f.add(min);
+			}
+			else if(vi.contains(s1.getVertex()) && !vi.contains(s2.getVertex())){//- le deuxième sommet s2 n'est pas présent dans le graphe partiel;
 				itv = v.iterator();
 				while(itv.hasNext() && s2.getTag() == 0){
 					aux = itv.next();
@@ -189,6 +192,7 @@ Output: Vnew and Enew describe a minimal spanning tree
 				}
 				v.add(s2);
 				vi.add(s2.getVertex());
+				f.add(min);
 			}
 		}
 		
@@ -199,43 +203,18 @@ Output: Vnew and Enew describe a minimal spanning tree
 		MST mst = new MST();
 
 		try {
-			Graph g = new ErdosRenyi().generateErdosRenyiGraph(6, (float) 0.5);
-
-			//Construction du MST par Prim
-			PrintWriter pw = new PrintWriter("graphPrim.txt");
-
+			Graph g = new ErdosRenyi().generateErdosRenyiGraph(1000, (float) 0.5);
+			PrintWriter pw;
+			
 			List<Vertex> lv = g.listVertex();
 			Iterator<Vertex> it = lv.iterator();
-			pw.print("graph G {\n");
-
-			Iterator<Edge> ite = mst.runPrim(g);
-			while(ite.hasNext()){
-				Edge edge = ite.next();
-				pw.print(edge.getVertex()[0].getVertex() + " -- " + edge.getVertex()[1].getVertex() + " [label=\"" + edge.getValue() + "\"];\n");
-			}
+			Iterator<Edge>  ite;
+			long start;
 			
-			pw.print("}");
-
-			pw.close();
-
-			//Construction du MST par Kruskal.
-			pw = new PrintWriter("graphKruskal.txt");
-
-			pw.print("graph G {\n");
-
-			ite = mst.runKruskal(g);
-			while(ite.hasNext()){
-				Edge edge = ite.next();
-				pw.print(edge.getVertex()[0].getVertex() + " -- " + edge.getVertex()[1].getVertex() + " [label=\"" + edge.getValue() + "\"];\n");
-			}
-			
-			pw.print("}");
-
-			pw.close();
+			Edge edge;
 			
 			//Construction du graphe d'origine.
 			pw = new PrintWriter("graph.txt");
-			
 			pw.print("graph G {\n");
 
 			it = lv.iterator();
@@ -245,13 +224,45 @@ Output: Vnew and Enew describe a minimal spanning tree
 			
 			ite = g.listEdges().iterator();
 			while(ite.hasNext()){
-				Edge edge = ite.next();
+				edge = ite.next();
 				pw.print(edge.getVertex()[0].getVertex() + " -- " + edge.getVertex()[1].getVertex() + " [label=\"" + edge.getValue() + "\"];\n");
 			}
 			
 			pw.print("}");
-			
 			pw.close();
+			
+			//Construction du MST par Prim
+			pw = new PrintWriter("graphPrim.txt");
+			pw.print("graph G {\n");
+
+			start = System.currentTimeMillis();
+			ite = mst.runPrim(g);
+			System.out.println("Temps d'éxec pour Prim: "+ ((System.currentTimeMillis() - start))+"ms.");
+			while(ite.hasNext()){
+				edge = ite.next();
+				pw.print(edge.getVertex()[0].getVertex() + " -- " + edge.getVertex()[1].getVertex() + " [label=\"" + edge.getValue() + "\"];\n");
+			}
+			
+			pw.print("}");
+			pw.close();
+
+			//Construction du MST par Kruskal.
+			pw = new PrintWriter("graphKruskal.txt");
+
+			pw.print("graph G {\n");
+
+			start = System.currentTimeMillis();
+			ite = mst.runKruskal(g);
+			System.out.println("Temps d'éxec pour Kruskal: "+ ((System.currentTimeMillis() - start))+"ms.");
+			while(ite.hasNext()){
+				edge = ite.next();
+				pw.print(edge.getVertex()[0].getVertex() + " -- " + edge.getVertex()[1].getVertex() + " [label=\"" + edge.getValue() + "\"];\n");
+			}
+			
+			pw.print("}");
+			pw.close();
+			
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
