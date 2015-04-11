@@ -4,25 +4,29 @@ public class Vertex {
 
 	private int summit;
 
-	private boolean marqued;
-	
+	private boolean mark;
+		
 	private int tag = 0;
 	
 	public Vertex(int i){
 		this.summit = i;
-		this.marqued = false;
+		this.mark = false;
 	}
 	
 	public int getVertex() {
 		return summit;
 	}
 	
-	public void marqued(){
-		this.marqued = true;
+	public void mark(){
+		this.mark = true;
 	}
 	
-	public boolean isMarqued(){
-		return this.marqued;
+	public void unmark(){
+		this.mark = false;
+	}
+	
+	public boolean isMarked(){
+		return this.mark;
 	}
 	
 	public void setTag(int tag){
@@ -32,4 +36,5 @@ public class Vertex {
 	public int getTag(){
 		return this.tag;
 	}
+
 }

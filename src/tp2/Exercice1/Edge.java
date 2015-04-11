@@ -38,6 +38,10 @@ public class Edge {
 		return new Vertex[]{this.s1, this.s2};
 	}
 	
+	public void setValue(Float val){
+		this.value = val;
+	}
+	
 	public Float getValue(){
 		return this.value;
 	}

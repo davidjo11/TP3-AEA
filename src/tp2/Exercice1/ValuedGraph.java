@@ -14,21 +14,22 @@ public class ValuedGraph implements Graph {
 	private List<Vertex> v;
 
 	private List<Edge> e;
+	
+	private int nbVertex;
 
+	private boolean[][] edges;
+	
 	public ValuedGraph() {
 		// TODO Auto-generated constructor stub
 		this.v = new ArrayList<Vertex>();
 		this.e = new ArrayList<Edge>();
 	}
 
-	public ValuedGraph(boolean oriented){
-		this.v = new ArrayList<Vertex>();
+	public ValuedGraph(int n){
+		this.v = new ArrayList<Vertex>(n);
 		this.e = new ArrayList<Edge>();
-		this.oriented = oriented;
-	}
-
-	public boolean isOriented() {
-		return oriented;
+		this.edges = new boolean[n][n];
+		this.nbVertex = n;
 	}
 
 	public List<Vertex> getV() {
@@ -60,37 +61,37 @@ public class ValuedGraph implements Graph {
 	@Override
 	public void addEdge(Vertex v1, Vertex v2, Float value) throws VertexNotFoundException {
 		// TODO Auto-generated method stub
-		boolean t1= false, t2 = false;
+		Vertex t1= null, t2 = null, aux = null;
 		Iterator<Vertex> it = this.v.iterator();
 
 		while(it.hasNext()){
-			if(it.next().getVertex() == v1.getVertex())
-				t1 = true;
-			else if(it.next().getVertex() == v2.getVertex())
-				t2 = true;
+			aux = it.next();
+			if(aux.getVertex() == v1.getVertex())
+				t1 = aux;
+			else if(aux.getVertex() == v2.getVertex())
+				t2 = aux;
 		}
-		if(!t1 || !t2)
+		if(t1 == null || t2 == null)
 			throw new VertexNotFoundException();
-		this.e.add(new Edge(v1,v2, value));
-
+		this.e.add(new Edge(t1,t2, value));
 	}
 
 	@Override
 	public void addEdge(int i, int j, Float value) throws VertexNotFoundException {
 		// TODO Auto-generated method stub
-		boolean t1= false, t2 = false;
+		Vertex t1= null, t2 = null, aux = null;
 		Iterator<Vertex> it = this.v.iterator();
 
 		while(it.hasNext()){
-			Vertex v = it.next();
-			if(v.getVertex() ==i)
-				t1 = true;
-			else if(v.getVertex() == j)
-				t2 = true;
+			aux = it.next();
+			if(aux.getVertex() ==i)
+				t1 = aux;
+			else if(aux.getVertex() == j)
+				t2 = aux;
 		}
-		if(!t1 || !t2)
+		if(t1 == null || t2 == null)
 			throw new VertexNotFoundException();
-		this.e.add(new Edge(new Vertex(i), new Vertex(j), value));
+		this.e.add(new Edge(t1, t2, value));
 	}
 
 	@Override
@@ -176,6 +177,56 @@ public class ValuedGraph implements Graph {
 	public List<Vertex> listVertex() {
 		// TODO Auto-generated method stub
 		return this.v;
+	}
+
+	/**
+	 * Retourne true si tout les sommets sont marqués, false sinon.
+	 */
+	@Override
+	public boolean allMarked() {
+		// TODO Auto-generated method stub
+		Iterator<Vertex> it = this.v.iterator();
+		Vertex v ;
+		while(it.hasNext()){
+			v = it.next();
+			if(!v.isMarked())
+				return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Retourne l'ensemble des sommets non marqués.
+	 */
+	@Override
+	public List<Vertex> getMarkedVertex() {
+		// TODO Auto-generated method stub
+		List<Vertex> res = new ArrayList<Vertex>();
+		Iterator<Vertex> it = this.v.iterator();
+		Vertex v ;
+		while(it.hasNext()){
+			v = it.next();
+			if(v.isMarked())
+				res.add(v);
+		}
+		return res;
+	}
+
+	/**
+	 * Supprime la marque sur chaque sommet que comporte le graphe.
+	 */
+	@Override
+	public void unmarkAll() {
+		// TODO Auto-generated method stub
+		Iterator<Vertex> it = this.v.iterator();
+		while(it.hasNext())
+			it.next().unmark();
+	}
+
+	@Override
+	public boolean[][] listEdges(int vertex) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

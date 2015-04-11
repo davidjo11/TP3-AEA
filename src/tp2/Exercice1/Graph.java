@@ -22,6 +22,8 @@ public interface Graph {
      
      public List<Edge> listEdges();
      
+     public boolean[][] listEdges(int vertex);
+     
      public List<Vertex> listVertex();
      
      public List<Integer> listVertexInt();
@@ -30,4 +32,9 @@ public interface Graph {
      
      public Edge getEdge(int v1, int v2);
      
+     public List<Vertex> getMarkedVertex();
+     
+     public boolean allMarked();
+     
+     public void unmarkAll();
 }
