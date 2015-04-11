@@ -75,7 +75,7 @@ Output: Vnew and Enew describe a minimal spanning tree
 				//				if(vertexAllMarked[u.getVertex()-1] > -1){
 				//				List<Edge> laux = g.getEdge(u.getVertex());
 				//				itlv = laux.iterator();
-				System.out.println(u.getVertex()+" a "+edgeU[u.getVertex()-1].length+" voisins: , il en reste "+vertexAllMarked[u.getVertex()-1]+".");
+//				System.out.println(u.getVertex()+" a "+edgeU[u.getVertex()-1].length+" voisins: , il en reste "+vertexAllMarked[u.getVertex()-1]+".");
 				for(int i=0;i<edgeU[u.getVertex()-1].length;i++){
 					aux = edgeU[u.getVertex()-1][i];
 					//On récupère le sommet v.
