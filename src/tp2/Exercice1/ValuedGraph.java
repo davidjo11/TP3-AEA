@@ -9,15 +9,9 @@ import tp2.Exercice1.exception.VertexNotFoundException;
 
 public class ValuedGraph implements Graph {
 
-	private boolean oriented;
-
 	private List<Vertex> v;
 
 	private List<Edge> e;
-	
-	private int nbVertex;
-
-	private boolean[][] edges;
 	
 	public ValuedGraph() {
 		// TODO Auto-generated constructor stub
@@ -28,8 +22,6 @@ public class ValuedGraph implements Graph {
 	public ValuedGraph(int n){
 		this.v = new ArrayList<Vertex>(n);
 		this.e = new ArrayList<Edge>();
-		this.edges = new boolean[n][n];
-		this.nbVertex = n;
 	}
 
 	public List<Vertex> getV() {

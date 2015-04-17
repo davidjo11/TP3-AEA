@@ -58,7 +58,6 @@ Output: Vnew and Enew describe a minimal spanning tree
 
 		Iterator<Vertex> itlu ;
 		Edge minValuedEdge = null, aux;
-		Iterator<Edge> itlv ;
 		Vertex u = null, v = null;
 		//Au lieu de faire un ensemble pour les sommmets u et un autre pour les sommets v, on marque le sommet si celui est dans l'ensemble u.
 		//Cela évite d'utiliser la fonction contains.
