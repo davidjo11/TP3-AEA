@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 
+import tools.comparator.EdgeComparator;
+import tools.comparator.VertexDegreeComparator;
+import tools.comparator.VertexDsaturComparator;
 import tp2.Exercice1.Edge;
 import tp2.Exercice1.Graph;
 import tp2.Exercice1.ValuedGraph;
