@@ -7,10 +7,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import tools.Tools;
 import tp2.Exercice1.Edge;
 import tp2.Exercice1.Graph;
 import tp2.Exercice1.Vertex;
-import tp2.utils.Tools;
 
 public class MST implements MSTTools {
 

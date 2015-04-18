@@ -65,6 +65,9 @@ public class ValuedGraph implements Graph {
 		}
 		if(t1 == null || t2 == null)
 			throw new VertexNotFoundException();
+		//on augmente le degré de chaque sommet
+		t1.setDegree(t1.getDegree()+1);
+		t2.setDegree(t2.getDegree()+1);
 		this.e.add(new Edge(t1,t2, value));
 	}
 
@@ -83,6 +86,9 @@ public class ValuedGraph implements Graph {
 		}
 		if(t1 == null || t2 == null)
 			throw new VertexNotFoundException();
+		//on augmente le degré de chaque sommet
+		t1.setDegree(t1.getDegree()+1);
+		t2.setDegree(t2.getDegree()+1);
 		this.e.add(new Edge(t1, t2, value));
 	}
 
@@ -134,7 +140,7 @@ public class ValuedGraph implements Graph {
 
 
 	/**
-	 * getEdge(int v) retourne l'ensemble des Edge ayant pour sommet v.
+	 * getEdge(int v) retourne l'ensemble des edges ayant pour sommet v.
 	 * @param vertex
 	 * @return
 	 */

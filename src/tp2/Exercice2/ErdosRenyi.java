@@ -1,9 +1,9 @@
 package tp2.Exercice2;
 
+import tools.Tools;
 import tp2.Exercice1.Graph;
 import tp2.Exercice1.ValuedGraph;
 import tp2.Exercice1.exception.VertexNotFoundException;
-import tp2.utils.Tools;
 
 public class ErdosRenyi implements RandomGraphGenerator {
 

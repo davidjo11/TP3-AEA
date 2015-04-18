@@ -1,4 +1,4 @@
-package tp2.utils;
+package tools;
 
 import java.io.PrintWriter;
 import java.util.Comparator;
@@ -18,8 +18,16 @@ public class Tools {
 	//SINGLETONS
 	public final static Comparator<Edge> EDGECOMPARATOR = new EdgeComparator();
 
+	public final static Comparator<Vertex> VERTEXDEGCOMPARATOR = new VertexDegreeComparator();
+
+	public final static Comparator<Vertex> VERTEXDSATURCOMPARATOR = new VertexDsaturComparator();
+
 	public final static Random RD = new Random();
 
+	//Values
+	public final static String[] COLORS = new String[]{"black", "blue", "cyan", "dimgray", "gray", "green", "lightgray", "magenta", "orange", "pink", "red", "white", "yellow", "mintcream", "crimson", "yellowgreen", "chartreuse", "dodgerblue", "darkorchid", "slategray", "sienna", "darkorange", "lavender", "indigo", "royalblue", "palevioletred", "oldlace", "ivory", "gold", "darkseagreen"};
+
+	public final static int colorMax = Tools.COLORS.length;
 
 	//METHODES
 	public static void toTextFormat(Graph g, String file) throws Exception{

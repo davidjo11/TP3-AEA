@@ -1,16 +1,24 @@
 package tp2.Exercice1;
 
+
 public class Vertex {
 
 	private int summit;
 
 	private boolean mark;
-		
-	private int tag = 0;
+	
+	private int degree;
+	
+	private int color;
+	
+	private int tag;
 	
 	public Vertex(int i){
 		this.summit = i;
 		this.mark = false;
+		this.tag = 0;
+		this.degree = 0;
+		this.color = -1;
 	}
 	
 	public int getVertex() {
@@ -37,4 +45,19 @@ public class Vertex {
 		return this.tag;
 	}
 
+	public void setDegree(int deg){
+		this.degree = deg;
+	}
+	
+	public int getDegree(){
+		return this.degree;
+	}
+
+	public int getColor() {
+		return color;
+	}
+
+	public void setColor(int color) {
+		this.color = color;
+	}
 }
