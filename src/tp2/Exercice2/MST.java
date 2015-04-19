@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 import tools.Tools;
 import tp2.Exercice1.Edge;
@@ -28,9 +29,7 @@ Choose an edge {u, v} with minimal weight such that u is in Vnew and v is not (i
 Add v to Vnew, and {u, v} to Enew
 Output: Vnew and Enew describe a minimal spanning tree
 	 */
-	@Override
 	public Iterator<Edge> runPrim(Graph g) {
-		// TODO Auto-generated method stub
 		List<Integer> q = g.listVertexInt();
 
 		//Le numéro d'un sommet pris au hasard.
@@ -139,7 +138,6 @@ Output: Vnew and Enew describe a minimal spanning tree
 	}
 
 	@SuppressWarnings("unused")
-	@Override
 	public Iterator<Edge> runKruskal(Graph g) {
 		// TODO Auto-generated method stub
 		int tag = 1;
@@ -226,9 +224,29 @@ Output: Vnew and Enew describe a minimal spanning tree
 
 	public static void main(String[] args){
 		MST mst = new MST();
-
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Saisir le nombre de sommet");
+		int nbSommets = 0;
+		try{
+			nbSommets = Integer.parseInt(sc.nextLine());
+		}catch(Exception e){
+			System.err.println("Veuillez saisir un entier");
+			System.exit(-1);
+		}
+		
+		System.out.println("Saisir la probabilité (entre 0 et 1) de produire des aretes");
+		float probabilite = 0;
+		try{
+			probabilite = Float.parseFloat(sc.nextLine());
+			if( probabilite < 0 || probabilite > 1){
+				System.err.println("Entre 0 et 1");
+				System.exit(1);
+			}
+		}catch(Exception e){
+			System.err.println("Veuillez saisir un flottant");
+		}
 		try {
-			Graph g = new ErdosRenyi().generateErdosRenyiGraph(1000, (float) 0.5);
+			Graph g = new ErdosRenyi().generateErdosRenyiGraph(nbSommets, (float)probabilite);
 			PrintWriter pw;
 
 			List<Vertex> lv = g.listVertex();
@@ -292,7 +310,6 @@ Output: Vnew and Enew describe a minimal spanning tree
 
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -37,4 +37,6 @@ public interface Graph {
      public boolean allMarked();
      
      public void unmarkAll();
+     
+     public int getNbColors();
 }

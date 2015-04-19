@@ -1,46 +1,56 @@
 package tp2.Exercice1;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import tools.Tools;
 import tp2.Exercice1.exception.VertexAlreadyExistException;
 import tp2.Exercice1.exception.VertexNotFoundException;
 
 public class ValuedGraph implements Graph {
 
+	/**
+	 * Liste des sommets du graphes
+	 */
 	private List<Vertex> v;
 
+	/**
+	 * Liste des aretes du graphes
+	 */
 	private List<Edge> e;
 	
+	/**
+	 * constructeur qui initialise les listes des sommets et des aretes
+	 */
 	public ValuedGraph() {
-		// TODO Auto-generated constructor stub
 		this.v = new ArrayList<Vertex>();
 		this.e = new ArrayList<Edge>();
 	}
 
+	/**
+	 * constructeur qui initialise la liste des sommets avec une liste de taille n
+	 * et initialise la liste des aretes
+	 * @param n
+	 */
 	public ValuedGraph(int n){
 		this.v = new ArrayList<Vertex>(n);
 		this.e = new ArrayList<Edge>();
 	}
 
-	public List<Vertex> getV() {
-		return v;
-	}
-
-	public List<Edge> getE() {
-		return e;
-	}
-
-	@Override
+	/**
+	 * Permet d'ajouter un sommet au graphe et donc a la liste des sommets
+	 */
 	public void addVertex(Vertex v) {
-		// TODO Auto-generated method stub
 		this.v.add(v);
 	}
 
-	@Override
+	/**
+	 * Permet d'ajouter un sommet au graphe à partir de son numéro 
+	 */
 	public void addVertexNumber(int i) throws VertexAlreadyExistException {
-		// TODO Auto-generated method stub
 		Iterator<Vertex> it = this.v.iterator();
 		while(it.hasNext()){
 			if(it.next().getVertex() == i){
@@ -50,9 +60,11 @@ public class ValuedGraph implements Graph {
 		this.v.add(new Vertex(i));
 	}
 
-	@Override
+	/**
+	 * permet d'ajouter une arete entre 2 sommets.
+	 * On incrémente par la meme occasion le degré des sommets concernés
+	 */
 	public void addEdge(Vertex v1, Vertex v2, Float value) throws VertexNotFoundException {
-		// TODO Auto-generated method stub
 		Vertex t1= null, t2 = null, aux = null;
 		Iterator<Vertex> it = this.v.iterator();
 
@@ -71,9 +83,12 @@ public class ValuedGraph implements Graph {
 		this.e.add(new Edge(t1,t2, value));
 	}
 
-	@Override
+
+	/**
+	 * permet d'ajouter une arete entre 2 sommets a partir de leurs numéros
+	 * On incrémente par la meme occasion le degré des sommets concernés
+	 */
 	public void addEdge(int i, int j, Float value) throws VertexNotFoundException {
-		// TODO Auto-generated method stub
 		Vertex t1= null, t2 = null, aux = null;
 		Iterator<Vertex> it = this.v.iterator();
 
@@ -92,24 +107,20 @@ public class ValuedGraph implements Graph {
 		this.e.add(new Edge(t1, t2, value));
 	}
 
-	@Override
+	/**
+	 * Récupere les numéros de tous les sommets du graphe 
+	 */
 	public List<Integer> listVertexInt(){
-
 		List<Integer> res = new ArrayList<Integer>();
-
 		Iterator<Vertex> it = this.v.iterator();
-
 		while(it.hasNext())
 			res.add(it.next().getVertex());
-
 		return res;
 	}
 
-	@Override
+	
 	public Vertex getVertex(int i) throws VertexNotFoundException {
-		// TODO Auto-generated method stub
 		Iterator<Vertex> it = this.v.iterator();
-
 		while(it.hasNext()){
 			Vertex v = it.next();
 			if(v.getVertex() == i)
@@ -158,31 +169,30 @@ public class ValuedGraph implements Graph {
 	}
 
 
-	@Override
 	public Iterator<Edge> getSortedEdgeIterator() {
-		// TODO Auto-generated method stub
-
 		return null;
 	}
 
-	@Override
+	/**
+	 * renvoi la liste des aretes du graphe
+	 * @return
+	 */
 	public List<Edge> listEdges() {
-		// TODO Auto-generated method stub
 		return this.e;
 	}
 
-	@Override
+	/**
+	 * Renvoi la liste des sommets du graphe
+	 * @return
+	 */
 	public List<Vertex> listVertex() {
-		// TODO Auto-generated method stub
 		return this.v;
 	}
 
 	/**
 	 * Retourne true si tout les sommets sont marqués, false sinon.
 	 */
-	@Override
 	public boolean allMarked() {
-		// TODO Auto-generated method stub
 		Iterator<Vertex> it = this.v.iterator();
 		Vertex v ;
 		while(it.hasNext()){
@@ -194,11 +204,9 @@ public class ValuedGraph implements Graph {
 	}
 
 	/**
-	 * Retourne l'ensemble des sommets non marqués.
+	 * Retourne l'ensemble des sommets marqués.
 	 */
-	@Override
 	public List<Vertex> getMarkedVertex() {
-		// TODO Auto-generated method stub
 		List<Vertex> res = new ArrayList<Vertex>();
 		Iterator<Vertex> it = this.v.iterator();
 		Vertex v ;
@@ -213,18 +221,23 @@ public class ValuedGraph implements Graph {
 	/**
 	 * Supprime la marque sur chaque sommet que comporte le graphe.
 	 */
-	@Override
 	public void unmarkAll() {
-		// TODO Auto-generated method stub
 		Iterator<Vertex> it = this.v.iterator();
 		while(it.hasNext())
 			it.next().unmark();
 	}
 
-	@Override
 	public boolean[][] listEdges(int vertex) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public int getNbColors() {
+		Set<String> list = new HashSet<String>();
+		Iterator<Vertex> it = this.v.iterator();
+		while(it.hasNext()){
+			list.add(Tools.COLORS[it.next().getColor()]);
+		}
+		return list.size();
 	}
 
 }
