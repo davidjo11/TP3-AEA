@@ -40,12 +40,6 @@ public class ValuedGraph implements Graph {
 		this.e = new ArrayList<Edge>();
 	}
 
-	/**
-	 * Permet d'ajouter un sommet au graphe et donc a la liste des sommets
-	 */
-	public void addVertex(Vertex v) {
-		this.v.add(v);
-	}
 
 	/**
 	 * Permet d'ajouter un sommet au graphe à partir de son numéro 
@@ -168,11 +162,6 @@ public class ValuedGraph implements Graph {
 		return res;
 	}
 
-
-	public Iterator<Edge> getSortedEdgeIterator() {
-		return null;
-	}
-
 	/**
 	 * renvoi la liste des aretes du graphe
 	 * @return
@@ -227,9 +216,6 @@ public class ValuedGraph implements Graph {
 			it.next().unmark();
 	}
 
-	public boolean[][] listEdges(int vertex) {
-		return null;
-	}
 
 	public int getNbColors() {
 		Set<String> list = new HashSet<String>();

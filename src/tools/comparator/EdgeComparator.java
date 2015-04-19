@@ -4,6 +4,12 @@ import java.util.Comparator;
 
 import tp2.Exercice1.Edge;
 
+/**
+ * 
+ * @author david
+ *
+ *Compare les aretes en fonction de leurs poids dans l'ordre croissant.
+ */
 public class EdgeComparator implements Comparator<Edge>{
 
 	public int compare(Edge e1, Edge e2) {

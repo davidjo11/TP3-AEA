@@ -139,7 +139,6 @@ Output: Vnew and Enew describe a minimal spanning tree
 
 	@SuppressWarnings("unused")
 	public Iterator<Edge> runKruskal(Graph g) {
-		// TODO Auto-generated method stub
 		int tag = 1;
 
 		List<Edge> f = new ArrayList<Edge>(), edges = g.listEdges();
@@ -224,6 +223,7 @@ Output: Vnew and Enew describe a minimal spanning tree
 
 	public static void main(String[] args){
 		MST mst = new MST();
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Saisir le nombre de sommet");
 		int nbSommets = 0;

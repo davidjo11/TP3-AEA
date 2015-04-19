@@ -1,6 +1,5 @@
 package tp3.Exercice1;
 
-import java.awt.peer.SystemTrayPeer;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -225,7 +224,7 @@ public class Coloration {
 		List<Vertex> vertex = g.listVertex();
 		int mincolor = 0;
 		Iterator<Vertex> itv = vertex.iterator();
-		Vertex v = null, voisin = null;
+		Vertex v = null;
 		Edge[][] voisins = new Edge[vertex.size()][1];
 
 		boolean[][] vColor = new boolean[vertex.size()][Tools.colorMax];
@@ -275,17 +274,18 @@ public class Coloration {
 	public static void main(String[] args) {
 
 		Coloration col = new Coloration();
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Saisir le nombre de sommet");
+		System.out.println("Saisir le nombre de sommet: ");
 		int nbSommets = 0;
 		try{
 			nbSommets = Integer.parseInt(sc.nextLine());
 		}catch(Exception e){
-			System.err.println("Veuillez saisir un entier");
+			System.err.println("Veuillez saisir un entier.");
 			System.exit(-1);
 		}
 		
-		System.out.println("Saisir la probabilité (entre 0 et 1) de produire des aretes");
+		System.out.println("Saisir la probabilité (entre 0 et 1) de produire des aretes: ");
 		float probabilite = 0;
 		try{
 			probabilite = Float.parseFloat(sc.nextLine());
@@ -342,7 +342,7 @@ public class Coloration {
 			start = System.currentTimeMillis();
 			col.runNaif(g);
 			System.out.println("Temps d'exéc pour l'algo Naïf: " + ((System.currentTimeMillis() - start)) + "ms.");
-			System.out.println("Nombre de couleur utilisé " + g.getNbColors());
+			System.out.println("Nombre de couleurs utilisées " + g.getNbColors());
 
 			it = lv.iterator();
 			while (it.hasNext()) {
@@ -383,7 +383,7 @@ public class Coloration {
 			start = System.currentTimeMillis();
 			col.runDSATUR(g);
 			System.out.println("Temps d'exéc pour l'algo DSATUR: " + ((System.currentTimeMillis() - start)) + "ms.");
-			System.out.println("Nombre de couleur utilisé " + g.getNbColors());
+			System.out.println("Nombre de couleurs utilisées " + g.getNbColors());
 			it = lv.iterator();
 			while (it.hasNext()) {
 				v = it.next();
@@ -415,7 +415,7 @@ public class Coloration {
 			start = System.currentTimeMillis();
 			col.runWelshPowell(g);
 			System.out.println("Temps d'exéc pour l'algo WelshPowell: " + ((System.currentTimeMillis() - start)) + "ms.");
-			System.out.println("Nombre de couleur utilisé " + g.getNbColors());
+			System.out.println("Nombre de couleurs utilisées " + g.getNbColors());
 
 			it = lv.iterator();
 			while (it.hasNext()) {

@@ -13,8 +13,6 @@ public class TempsDeCalcul {
 	public static void main(String[] args) {
 
 		Coloration col = new Coloration();
-		float pasP = (float) 0.2;
-		int pasN = 50;
 		int compteur = 0;
 		int nbCouleursNaif = 0;
 		int nbCouleursDSATUR = 0;
